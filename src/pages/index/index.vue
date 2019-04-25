@@ -48,16 +48,16 @@
     },
     mounted: function() {
       this.queryArticle()
-      // this.queryCategory();
+      this.queryCategory();
     },
     methods: {
       queryArticle: function() {
-        this.$http.get("/api/index/index_article").then(function(e) {
-
+        this.$http.get("/index/index_article").then(function(data) {
+          console.log(data)
         })
       },
       queryCategory: function() {
-        this.$http.get("/api/index/index_category").then(function(e) {
+        this.$http.get("/index/index_category").then(function(e) {
 
         })
       },
