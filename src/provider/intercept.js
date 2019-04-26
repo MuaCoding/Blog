@@ -6,9 +6,10 @@ import router from "../router";
 
 axios.create({
   // headers: {'Content-Type': 'application/json'},
-  timeout: 60000
+  baseURL: 'http://127.0.0.1:3000',
+  timeout: 50000
 });
-axios.defaults.baseURL = 'http://localhost:4000'
+// axios.defaults.baseURL = '/api'
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 // 请求拦截
@@ -24,11 +25,10 @@ axios.interceptors.request.use(config => {
   return Promise.reject(error)
 })
 axios.interceptors.response.use(
-  t => {
-    let e = t.data;
-    return t
-  }, t => {
-    return Promise.reject(t)
+  response => {
+    return response
+  }, error => {
+    return Promise.reject(error)
   }
 )
 

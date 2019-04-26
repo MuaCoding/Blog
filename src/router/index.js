@@ -16,7 +16,7 @@ const router = new Router({
     },
     component: resolve => require(['@/pages/index/index'],resolve),
     children:[{
-      path: "/",
+      path: "/index",
       name: "index",
       meta: {
         title: "首页"
