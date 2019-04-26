@@ -1,6 +1,6 @@
 <template>
   <header class="el-header">
-    <div class="site-logo">
+    <div class="site-logo" @click="routerTo">
       <span class="inner-text">博客</span>
     </div>
     <div class="user-info">
@@ -17,7 +17,17 @@
 
 <script>
   export default {
-    name: "HeaderBar"
+    name: "HeaderBar",
+    data(){
+      return{}
+    },
+    methods:{
+      routerTo: function() {
+        this.$router.push({
+          name: 'index'
+        })
+      },
+    }
   }
 </script>
 

@@ -6,11 +6,11 @@
 
       <!-- Header -->
       <header id="header">
-        <h1>Xiao Ming classmate</h1>
-        <p>Independent Developer &nbsp;•&nbsp; Keep learning and upgrade your core values.</p>
+        <h1>Xiao Ming Classmate</h1>
+        <p>Independent Developer &nbsp;•&nbsp; Keep learning and upgrade your core values</p>
         <nav>
           <ul>
-            <li><a href="https://www.linkedin.com/in/imshuhao/" class="iconfont article"><span class="label">Article</span></a></li>
+            <li @click="routerTo"><a class="iconfont article"><span class="label">Article</span></a></li>
             <li><a href="https://github.com/XiaoMingLi" class="iconfont github"><span class="label">GitHub</span></a></li>
             <li><a href="https://weibo.com/3174227040/profile?topnav=1&wvr=6" class="iconfont weibo"><span class="label">Weibo</span></a></li>
             <li><a href="https://juejin.im/user/579ebb5e5bbb500064e67a27/activities" class="iconfont xitu"><span class="label">Xitu</span></a></li>
@@ -20,9 +20,8 @@
 
       <!-- Footer -->
       <footer id="footer">
-        <span class="copyright">© Xiao Ming Li. Designed by www.</span>
+        <span class="copyright">© Xiao Ming Designed by www</span>
       </footer>
-
     </div>
   </div>
 </template>
@@ -46,34 +45,14 @@
       FooterBar
     },
     mounted: function() {
-      this.queryArticle()
-      this.queryCategory();
+      // this.queryArticle()
+      // this.queryCategory();
     },
     methods: {
-      queryArticle: function() {
-        const t = this
-        const formData = {
-          pageNum: this.page,
-          pageSize: this.size,
-          state: 1,
-          keyword:'',
-          likes: false,
-          tag_id: '',
-          category_id: '',
-        }
-        this.$http.get("/api/getArticleList",{
-          params: formData
-        }).then(function(e) {
-          let s = e.data.data;
-          console.log(s)
-          t.list = s.list,t.total = s.count;
-          console.log(t.list)
-        }).catch(function(e) {
-          t.list = [],t.total = 0,t.page = 1;
+      routerTo: function() {
+        this.$router.push({
+          name: 'list'
         })
-      },
-      queryCategory: function() {
-
       },
       logout: function() {
         this.$router.replace({

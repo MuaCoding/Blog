@@ -6,23 +6,23 @@ Vue.use(Router)
 const router = new Router({
   routes: [{
     path: "*",
-    redirect: "/",
-  }, {
-    path: "/",
-    name: "entry",
     redirect: "/index",
+  }, {
+    path: "/index",
+    name: "index",
     meta: {
       title: "首页"
     },
     component: resolve => require(['@/pages/index/index'],resolve),
+  },{
+    path: "/list",
+    name: "list",
+    // redirect: "/list",
+    meta: {
+      title: "文章"
+    },
+    component: resolve => require(['@/pages/article/list'],resolve),
     children:[{
-      path: "/index",
-      name: "index",
-      meta: {
-        title: "首页"
-      },
-      component: resolve => require(['@/pages/article/list'],resolve),
-    },{
       path: "detail",
       name: "detail",
       meta: {

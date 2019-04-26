@@ -74,6 +74,18 @@
   top: 0;
   width: 100%;
   color: #ffffff;
+
+  a {
+    transition: border-color 0.2s ease-in-out;
+    border-bottom: dotted 1px;
+    color: inherit;
+    outline: 0;
+    text-decoration: none;
+  }
+
+  a:hover {
+    border-color: transparent;
+  }
 }
 
 /* BG */
