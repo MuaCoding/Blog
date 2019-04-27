@@ -4,7 +4,7 @@
     <el-main>
       <div class="list-container">
         <ul class="note-list">
-          <li class="have-img" v-for="item in [1,2,3,4]">
+          <li class="have-img" v-for="item in list">
             <a href="" class="wrap-img">
               <img
                 src="https://upload-images.jianshu.io/upload_images/10696270-43d222c1f8051c63?imageMogr2/auto-orient/strip|imageView2/1/w/360/h/240"
@@ -52,7 +52,7 @@
       FooterBar
     },
     mounted: function() {
-      // this.queryArticle()
+      this.queryArticle()
       // this.queryCategory();
     },
     methods: {

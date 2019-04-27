@@ -27,22 +27,14 @@
 </template>
 
 <script>
-  import HeaderBar from 'components/common/HeaderBar';
-  import FooterBar from 'components/common/FooterBar';
 
   export default {
     name: "index",
     data() {
       return {
-        total: 1,
-        page: 1,
-        size: 10,
-        list: [],
       }
     },
     components: {
-      HeaderBar,
-      FooterBar
     },
     mounted: function() {
       // this.queryArticle()
@@ -64,15 +56,7 @@
 </script>
 
 
-<style lang="scss" rel="stylesheet/scss">
+<style scoped lang="scss" rel="stylesheet/scss">
   @import 'common/scss/main.scss';
-  .main {
-    height: 100%;
-    left: 0;
-    position: fixed;
-    text-align: center;
-    top: 0;
-    width: 100%;
-  }
 
 </style>

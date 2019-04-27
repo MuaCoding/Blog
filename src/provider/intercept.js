@@ -6,7 +6,7 @@ import router from "../router";
 
 axios.create({
   // headers: {'Content-Type': 'application/json'},
-  baseURL: 'http://127.0.0.1:3000',
+  baseURL: "/api", // api的base_url
   timeout: 50000
 });
 // axios.defaults.baseURL = '/api'
