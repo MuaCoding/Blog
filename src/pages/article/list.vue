@@ -6,9 +6,7 @@
         <ul class="note-list">
           <li class="have-img" v-for="item in list">
             <a href="" class="wrap-img">
-              <img
-                src="https://upload-images.jianshu.io/upload_images/10696270-43d222c1f8051c63?imageMogr2/auto-orient/strip|imageView2/1/w/360/h/240"
-                alt="">
+              <img :src="item.img_url" alt="">
             </a>
             <div class="content">
               <a target="_blank" class="title">{{item.title}}</a>
@@ -16,11 +14,12 @@
                 {{item.desc}}
               </p>
               <div class="meta">
-                <a class="nickname" target="_blank" href="">韩老师说财商</a>
+                <span><i class="iconfont ic-list-like"></i> 浏览 {{item.meta.views}}</span>
                 <a target="_blank" href="">
-                  <i class="iconfont ic-list-comments"></i> 评论 3
+                  <i class="iconfont ic-list-comments"></i> 评论 {{item.meta.comments}}
                 </a>
-                <span><i class="iconfont ic-list-like"></i> 点赞 81</span>
+                <span><i class="iconfont ic-list-like"></i> 点赞 {{item.meta.likes}}</span>
+                <a class="nickname" target="_blank" href="">{{item.create_time | formatDate }}</a>
               </div>
             </div>
           </li>
@@ -36,6 +35,7 @@
 <script>
   import HeaderBar from 'components/common/HeaderBar';
   import FooterBar from 'components/common/FooterBar';
+  import {FormatTime} from '../../common/utils/utils';
 
   export default {
     name: "index",
@@ -51,36 +51,46 @@
       HeaderBar,
       FooterBar
     },
-    mounted: function() {
+    filters: {
+      formatDate: function (time) {
+        if (time != null && time != "") {
+          return FormatTime(time, true);
+        } else {
+          return "";
+        }
+      }
+    },
+    mounted: function () {
       this.queryArticle()
       // this.queryCategory();
     },
     methods: {
-      queryArticle: function() {
+      queryArticle: function () {
         const t = this
         const formData = {
           pageNum: this.page,
           pageSize: this.size,
           state: 1,
-          keyword:'',
+          keyword: '',
           likes: false,
           tag_id: '',
           category_id: '',
         }
-        this.$http.get("/api/getArticleList",{
+        this.$http.get("/api/getArticleList", {
           params: formData
-        }).then(function(e) {
+        }).then(function (e) {
           let s = e.data.data;
-          t.list = s.list,t.total = s.count;
+
+          t.list = s.list, t.total = s.count;
           console.log(t.list)
-        }).catch(function(e) {
-          t.list = [],t.total = 0,t.page = 1;
+        }).catch(function (e) {
+          t.list = [], t.total = 0, t.page = 1;
         })
       },
-      queryCategory: function() {
+      queryCategory: function () {
 
       },
-      logout: function() {
+      logout: function () {
         this.$router.replace({
           name: "logout"
         })
@@ -90,23 +100,20 @@
 </script>
 
 
-<style lang="scss" rel="stylesheet/scss">
-  .el-footer {
-    background-color: #ffffff;
-    text-align: center;
-    line-height: 64px;
-  }
+<style scoped lang="scss" rel="stylesheet/scss">
 
   .main {
     .el-main {
-      margin-top: 60px;
+      margin-top: 90px;
       margin-right: auto;
       margin-left: auto;
       padding-left: 15px;
       padding-right: 15px;
       background-color: #fff;
       min-height: 780px;
+      height: 100%;
       max-width: 700px;
+
 
       .have-img {
         .content {
@@ -119,6 +126,7 @@
       }
 
     }
+
     .note-list {
 
       .title {
@@ -150,7 +158,8 @@
           margin-right: 10px;
           color: #b4b4b4;
         }
-        a{
+
+        a {
           transition: .1s ease-in;
         }
 
@@ -197,11 +206,11 @@
 
   }
 
-
-  .load-more{
+  .load-more {
     padding: 0 60px;
     text-align: center;
   }
+
   body {
     padding-top: 76px;
   }
