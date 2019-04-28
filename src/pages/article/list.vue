@@ -26,7 +26,8 @@
         </ul>
       </div>
       <div class="load-more">
-        <el-button style="width: 100%" type="primary" round>阅读更多</el-button>
+        <el-button style="width: 100%" type="primary" round @click="loadingMore" v-if="!noLoading">阅读更多</el-button>
+        <p v-if="noLoading" style="font-size: 13px;">-- 我是有底线的 --</p>
       </div>
     </el-main>
   </el-container>
@@ -43,7 +44,9 @@
       return {
         total: 1,
         page: 1,
-        size: 10,
+        size: 2,
+        isLoading: false,
+        noLoading: false,
         list: [],
       }
     },
@@ -66,7 +69,9 @@
     },
     methods: {
       queryArticle: function () {
+
         const t = this
+        this.isLoading = true;
         const formData = {
           pageNum: this.page,
           pageSize: this.size,
@@ -80,15 +85,24 @@
           params: formData
         }).then(function (e) {
           let s = e.data.data;
-
-          t.list = s.list, t.total = s.count;
+          t.list = t.list.concat(s.list), t.total = s.count,t.isLoading = false;
           console.log(t.list)
+
+          if (t.total === t.list.length) {
+            t.noLoading = true;
+          }
         }).catch(function (e) {
           t.list = [], t.total = 0, t.page = 1;
         })
       },
       queryCategory: function () {
 
+      },
+      loadingMore() {
+        if (this.isLoading == false && this.noLoading == false){
+          this.page++;
+          this.queryArticle()
+        }
       },
       logout: function () {
         this.$router.replace({

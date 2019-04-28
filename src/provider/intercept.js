@@ -10,7 +10,7 @@ axios.create({
   timeout: 50000
 });
 // axios.defaults.baseURL = '/api'
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 // 请求拦截
 axios.interceptors.request.use(config => {
@@ -22,13 +22,15 @@ axios.interceptors.request.use(config => {
   // }
   return config
 }, error => {
+  console.error('error:' + error); // for debug
   return Promise.reject(error)
 })
 axios.interceptors.response.use(
   response => {
     return response
   }, error => {
-    return Promise.reject(error)
+    console.error('error:' + error); // for debug
+    Promise.reject(error)
   }
 )
 
